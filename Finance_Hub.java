@@ -11,8 +11,8 @@ import java.net.URL;
 class Finance_Hub extends JFrame{
 
    public JLabel poundJLabel;
-   public JCheckBox rupeeJCheckBox, euroJCheckBox;
-   public JTextField poundJTextField, rupeeJTextField,euroJTextField;
+   public JCheckBox rupeeJCheckBox, euroJCheckBox, dollarJCheckBox, yenJCheckBox;
+   public JTextField poundJTextField, rupeeJTextField,euroJTextField, dollarJTextField, yenJTextField;
    public JButton convertJButton;
 
 //-----------------------------------------------------------------------------
@@ -46,7 +46,7 @@ class Finance_Hub extends JFrame{
       contentPane.setLayout( null );
 
       poundJLabel = new JLabel();
-      poundJLabel.setText( "Amount £: " );
+      poundJLabel.setText( "Amount Â£: " );
       poundJLabel.setBounds(20,20,120,30);
       contentPane.add(poundJLabel);
 
@@ -55,10 +55,20 @@ class Finance_Hub extends JFrame{
       rupeeJCheckBox.setBounds(20,60,100,20);
       contentPane.add(rupeeJCheckBox);
 
-      euroJCheckBox = new JCheckBox();
+ 	  euroJCheckBox = new JCheckBox();
       euroJCheckBox.setText( "Euro" );
       euroJCheckBox.setBounds(20,100,100,20);
       contentPane.add(euroJCheckBox);    
+
+      dollarJCheckBox = new JCheckBox();
+      dollarJCheckBox.setText( "Dollar" );
+      dollarJCheckBox.setBounds(20,140,100,20);
+      contentPane.add(dollarJCheckBox);
+      
+      yenJCheckBox = new JCheckBox();
+      yenJCheckBox.setText( "Yen" );
+      yenJCheckBox.setBounds(20,180,100,20);
+      contentPane.add(yenJCheckBox);
 
       poundJTextField = new JTextField();
       poundJTextField.setBounds(130,20,80,30);        
@@ -87,10 +97,24 @@ class Finance_Hub extends JFrame{
       euroJTextField = new JTextField();
       euroJTextField.setBounds(130,100,80,20);
      			 euroJTextField.setHorizontalAlignment(JTextField.RIGHT);
-      euroJTextField.setText( "€ 0.00" );
+      euroJTextField.setText( "â‚¬ 0.00" );
       euroJTextField.setEditable(false);
       contentPane.add(euroJTextField);
-                 
+         
+      dollarJTextField = new JTextField();
+      dollarJTextField.setBounds(130,140,80,20);
+      			dollarJTextField.setHorizontalAlignment(JTextField.RIGHT);
+      dollarJTextField.setText( "$ 0.00" );
+      dollarJTextField.setEditable(false);
+      contentPane.add(dollarJTextField);
+      
+      yenJTextField = new JTextField();
+      yenJTextField.setBounds(130,180,80,20);
+      			yenJTextField.setHorizontalAlignment(JTextField.RIGHT);
+      yenJTextField.setText( "Â¥ 0.00" );
+      yenJTextField.setEditable(false);
+      contentPane.add(yenJTextField);
+           
       convertJButton = new JButton();
       convertJButton.setText( "Calculate Foreign Currency" );
       convertJButton.setBounds(20,220,200,30);
@@ -125,11 +149,23 @@ class Finance_Hub extends JFrame{
 
       if(euroJCheckBox.isSelected()){
 
-            DecimalFormat dfr = new DecimalFormat( "€ 0.00" );
+            DecimalFormat dfr = new DecimalFormat( "â‚¬ 0.00" );
             double euroAmount = amount * findExchangeRateAndConvert("GBP", "EUR", 1);
             euroJTextField.setText(dfr.format(euroAmount));
       }	  
            
+      if(dollarJCheckBox.isSelected()){
+
+            DecimalFormat dfd = new DecimalFormat( "$ 0.00" );
+            double dollarAmount = amount * findExchangeRateAndConvert("GBP", "USD", 1);
+			dollarJTextField.setText(dfd.format(dollarAmount));
+      }
+      
+      if(yenJCheckBox.isSelected()){
+
+            DecimalFormat dfd = new DecimalFormat( "Â¥ 0.00" );
+            double yenAmount = amount * findExchangeRateAndConvert("GBP", "JPY", 1);
+            yenJTextField.setText(dfd.format(yenAmount));
       }
    };
  
@@ -138,6 +174,8 @@ class Finance_Hub extends JFrame{
 
       rupeeJTextField.setText( "0" );
       euroJTextField.setText( "0" );      
+	  dollarJTextField.setText( "0" );
+      yenJTextField.setText( "0" );
    }
 
 //---------------------------------------------------------------------------------
